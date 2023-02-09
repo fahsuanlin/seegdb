@@ -1,1 +1,3 @@
-# seegdb
+# SEEGdb SEEG database
+
+
