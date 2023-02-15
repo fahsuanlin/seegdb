@@ -15,3 +15,5 @@ To render a set of points (to represent a few electrode contacts) on the cortica
 
 
 ## External resources.
+- [SEEG electrode contact localization using post-op MRI](https://github.com/fahsuanlin/fhlin_toolbox/wiki/SEEG:-register-electrodes-to-MRI)
+- [SEEG electrode contact localization using post-op MRI II](https://github.com/fahsuanlin/fhlin_toolbox/wiki/SEEG:-register-electrodes-to-MRI-(II))
