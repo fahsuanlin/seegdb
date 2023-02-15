@@ -13,7 +13,7 @@ Here is the link to [a tar ball] of the electrode locations in the [MNI305](http
 ## Code
 - To render a set of points (to represent a few electrode contacts) on the cortical surface in Matlab, you can use [our toolbox](https://github.com/fahsuanlin/fhlin_toolbox/wiki). With the installed toolbox, [this Matlab script]() shows a few electrods contact on the pial surface of the left hemisphere in the MNI305 atlas.
 
-- Head model: The vertices and edges of the triangulated pial surface of the [left](https://github.com/fahsuanlin/seegdb/blob/master/scripts/brain_left.mat) and [right](https://github.com/fahsuanlin/seegdb/blob/master/scripts/brain_left.mat) hemispheres.
+- Head model: The vertices and edges of the triangulated pial surface of the [left](https://github.com/fahsuanlin/seegdb/blob/master/data/brain_left.mat) and [right](https://github.com/fahsuanlin/seegdb/blob/master/data/brain_left.mat) hemispheres.
 
 - Coordinate system. 
 
