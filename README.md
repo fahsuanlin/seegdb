@@ -8,12 +8,10 @@ This project aims at providing a comprehensive accesss to SEEG data across all p
 
 ## Data
 
-Data were EEG time series collected inside a 3T MRI scanner (Skyra, Siemens). EEG were sampled by a 32-channel systemm (Brain Products) with electrodes arranged by the international 10-20 standard. EEG were sampled at 5,000 Hz.
-
-
+Here is the link to [a tar ball] of the electrode locations in the [MNI305](https://www.mcgill.ca/bic/software/tools-data-analysis/anatomical-mri/atlases/mni-305) coordinate system. Note that each patient had a few implanted electrodes, each of which had a few contacts. Patients were using electrodes from (AD-Tech](https://adtechmedical.com/epilepsy) with contacts separated by 5 mm. 
 
 ## Code
-
+To render a set of points (to represent a few electrode contacts) on the cortical surface in Matlab, you can use [our toolbox](https://github.com/fahsuanlin/fhlin_toolbox/wiki). [THis Matlab script]() shows a few electrods contact on the pial surface of the left hemisphere in the MNI305 atlas.
 
 
 ## External resources.
