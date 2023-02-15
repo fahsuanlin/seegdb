@@ -4,7 +4,7 @@ Stereo-encephalography (SEEG) is the method to invasively record neuronal popula
 
 This project aims at providing a comprehensive accesss to SEEG data across all patients. Specifically, an interface linking between the electrode locations and data is created.
 
-![](https://github.com/fahsuanlin/seegdb/blob/main/images/seeg_intro.png)
+![](https://github.com/fahsuanlin/seegdb/blob/main/images/seeg_mne.png)
 
 ## Data
 
