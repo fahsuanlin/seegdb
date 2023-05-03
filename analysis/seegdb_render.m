@@ -48,19 +48,19 @@ if(isfield(seegdb_obj,'row_select'))
         E.n_contact=1;
         electrode(e_counter)=E;
 
-        switch ll_idx
-            case 1
-                e_color=[0   0.4470   0.741];
-            case 2
-                e_color=[0.8500 0.3250 0.0980];
-            case 3
-                e_color=[0.9290 0.6940 0.1250];
-        end;
+%         switch ll_idx
+%             case 1
+%                 e_color=[0   0.4470   0.741];
+%             case 2
+%                 e_color=[0.8500 0.3250 0.0980];
+%             case 3
+%                 e_color=[0.9290 0.6940 0.1250];
+%         end;
 
-        aux2_point_individual_color(e_counter,:)=e_color;
+        aux2_point_individual_color(e_counter,:)=seegdb_obj.ContactColor;
         aux2_point_coords(e_counter,:)=E.coord(1,:);
-        %aux2_point_name{e_counter}=sprintf('%s_%d',E(1).name,1);
-        aux2_point_name{e_counter}=sprintf('%04d',ii);
+        %aux2_point_name{e_counter}=sprintf('%04d',ii);
+        aux2_point_name{e_counter}=''; %no name
 
         e_counter=e_counter+1;
     end;
@@ -102,10 +102,32 @@ end;
 
 %clear global etc_render_fsbrain;
 
-if(~isempty(aux2_point_coords))
-    etc_render_fsbrain('curv_pos_color',[1 1 1].*0.5,'curv_neg_color',[1 1 1].*0.5,'alpha',0.3,'surf',surf,'hemi',hemi,'subject',subject,'vol',mri,'talxfm',(talxfm),'topo_aux2_point_coords',aux2_point_coords,'electrode',electrode,'selected_electrode_flag',0,'selected_contact_flag',0,'aux2_point_individual_color',aux2_point_individual_color);
-    view(90,30);
+if(~seegdb_obj.flag_RenderKeep)
+    if(~isempty(aux2_point_coords))
+        global etc_render_fsbrain;
+        if(isempty(etc_render_fsbrain))
+            clear global etc_render_fsbrain;
+
+            %etc_render_fsbrain('curv_pos_color',[1 1 1].*0.5,'curv_neg_color',[1 1 1].*0.5,'alpha',0.3,'surf',surf,'hemi',hemi,'subject',subject,'vol',mri,'talxfm',(talxfm),'topo_aux2_point_coords',aux2_point_coords,'electrode',electrode,'selected_electrode_flag',0,'selected_contact_flag',0,'aux2_point_individual_color',aux2_point_individual_color);
+            feval(@etc_render_fsbrain,'curv_pos_color',[1 1 1].*0.5,'curv_neg_color',[1 1 1].*0.5,'alpha',0.3,'surf',surf,'hemi',hemi,'subject',subject,'vol',mri,'talxfm',(talxfm),'topo_aux2_point_coords',aux2_point_coords,'topo_aux2_point_name',aux2_point_name,'electrode',electrode,'selected_electrode_flag',0,'selected_contact_flag',0,'aux2_point_individual_color',aux2_point_individual_color);
+            view(90,30);
+            etc_render_fsbrain_handle('redraw');
+        else %replace
+            etc_render_fsbrain.aux2_point_coords=aux2_point_coords;
+            etc_render_fsbrain.aux2_point_name=aux2_point_name;
+            etc_render_fsbrain_handle('redraw');
+        end;
+    end;
+else %append
+    global etc_render_fsbrain;
+
+
+    idx=find(~ismember(aux2_point_coords, etc_render_fsbrain.aux2_point_coords, 'rows'));
+    etc_render_fsbrain.aux2_point_coords=cat(1,etc_render_fsbrain.aux2_point_coords,aux2_point_coords(idx,:));
+    etc_render_fsbrain.aux2_point_name(end+1:end+size(aux2_point_coords(idx,:),1))=aux2_point_name(idx);
+    etc_render_fsbrain.aux2_point_individual_color=cat(1,etc_render_fsbrain.aux2_point_individual_color,aux2_point_individual_color(idx,:));
     etc_render_fsbrain_handle('redraw');
+
 end;
 % global etc_render_fsbrain;
 % etc_render_fsbrain.label_value=label_value;
