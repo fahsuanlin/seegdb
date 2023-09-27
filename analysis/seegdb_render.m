@@ -1,5 +1,12 @@
 function [output]=seegdb_render(seegdb_obj)
 
+
+global etc_render_fsbrain;
+if(~isempty(etc_render_fsbrain))
+    etc_render_fsbrain_handle('del');
+end;
+clear global etc_render_fsbrain;
+
 output=[];
 
 subject='fsaverage';

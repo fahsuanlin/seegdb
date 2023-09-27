@@ -70,6 +70,10 @@ for label_idx=1:length(file_label)
             end;
         end;
 
+        valid_electrode_idx=find(~isnan(electrode_dist_min(:)));
+        invalid_electrode_idx=find(isnan(electrode_dist_min(:)));
+
+
         electrode_dist_min_com=ones(length(electrode),max_contact).*nan;
 
         for e_idx=1:length(electrode)
@@ -89,6 +93,7 @@ for label_idx=1:length(file_label)
         end;
         fprintf('\n');
 
+        electrode_dist_min(invalid_electrode_idx)=inf;
         [dummy,min_idx]=sort(electrode_dist_min(:));
         fprintf('<<%s>>\n',roi(label_idx).name);
         for ii=1:3 %show the nearest three contacts
@@ -104,10 +109,13 @@ for label_idx=1:length(file_label)
                 distance.min(ii).electrode=electrode(ee).name;
                 distance.min(ii).contact=cc;
                 distance.min(ii).distance=electrode_dist_min(ee,cc);
-                distance.min(ii).x=electrode(ee).coord(cc,1);
-                distance.min(ii).y=electrode(ee).coord(cc,2);
-                distance.min(ii).z=electrode(ee).coord(cc,3); 
-                ii=ii+1;
+                try
+                    distance.min(ii).x=electrode(ee).coord(cc,1);
+                    distance.min(ii).y=electrode(ee).coord(cc,2);
+                    distance.min(ii).z=electrode(ee).coord(cc,3); 
+                    ii=ii+1;
+                catch
+                end;
                 end;
             end;
         end;
@@ -139,6 +147,7 @@ for label_idx=1:length(file_label)
             end;
         end;
 
+        electrode_dist_min_com(invalid_electrode_idx)=inf;
         [dummy,min_idx]=sort(electrode_dist_min_com(:));
         for ii=1:3 %show the nearest three contacts
             [ee,cc]=ind2sub(size(electrode_dist_min_com),min_idx(ii));
@@ -153,10 +162,13 @@ for label_idx=1:length(file_label)
                 distance.com(ii).electrode=electrode(ee).name;
                 distance.com(ii).contact=cc;
                 distance.com(ii).distance=electrode_dist_min_com(ee,cc);
+                try
                 distance.com(ii).x=electrode(ee).coord(cc,1);
                 distance.com(ii).y=electrode(ee).coord(cc,2);
                 distance.com(ii).z=electrode(ee).coord(cc,3); 
                 ii=ii+1;
+                catch
+                end;
                 end;
             end;
         end;
