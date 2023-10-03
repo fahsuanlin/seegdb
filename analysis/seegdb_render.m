@@ -1,11 +1,11 @@
 function [output]=seegdb_render(seegdb_obj)
 
 
-global etc_render_fsbrain;
-if(~isempty(etc_render_fsbrain))
-    etc_render_fsbrain_handle('del');
-end;
-clear global etc_render_fsbrain;
+% global etc_render_fsbrain;
+% if(~isempty(etc_render_fsbrain))
+%     etc_render_fsbrain_handle('del');
+% end;
+% clear global etc_render_fsbrain;
 
 output=[];
 
@@ -131,6 +131,7 @@ if(~seegdb_obj.flag_RenderKeep|isempty(etc_render_fsbrain))
         else %replace
             etc_render_fsbrain.aux2_point_coords=aux2_point_coords;
             etc_render_fsbrain.aux2_point_name=aux2_point_name;
+            etc_render_fsbrain.aux2_point_individual_color=repmat(aux2_point_individual_color,[size(aux2_point_coords,1),1]);
             etc_render_fsbrain_handle('redraw');
         end;
     end;
